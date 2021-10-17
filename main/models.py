@@ -1,4 +1,6 @@
 from django.db import models
+from connect.models import User
+# from django.contrib.auth.models import User
 
 
 class Quiz(models.Model):
@@ -12,28 +14,35 @@ class Quiz(models.Model):
         return self.name
 
     def get_questions(self):
-        return self.question_set.all()
-
+        return self.question.all()
 
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="question")
     text = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    # answer = models.CharField(max_length=200)
-    # points = models.IntegerField(default=0)
-
+        
 
     def __str__(self):
         return self.text
 
     def get_answers(self):
-        return self.answer_set.all()
+        return self.answer.all()
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
     text = models.CharField(max_length=200)
     correct = models.BooleanField(default=False)
     cereated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.text
+
+class Result(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="result")
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    score = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
+

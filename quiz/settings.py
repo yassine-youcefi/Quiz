@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 
     'main',
+    'connect'
 ]
 
 MIDDLEWARE = [
