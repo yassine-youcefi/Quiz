@@ -14,7 +14,7 @@ class Quiz(models.Model):
         return self.name
 
     def get_questions(self):
-        return self.question.all()
+        return self.question.all()[:self.number_of_questions]
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="question")
