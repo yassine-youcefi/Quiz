@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'livesync',
 
 
     'main',
@@ -53,6 +54,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = (
+    'livesync.core.middleware.DjangoLiveSyncMiddleware',
+)
+
+
+DJANGO_LIVESYNC = {
+    'PORT': 8000 # this is optional and is default set to 9001.
+}
 
 ROOT_URLCONF = 'quiz.urls'
 

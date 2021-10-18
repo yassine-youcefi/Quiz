@@ -1,0 +1,47 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Quize list
+{% endblock title %}
+
+{% block content%}
+<h1>Quizes :</h1>
+<hr>
+{% for quize in object_list %}
+<!-- Modal -->
+<div class="modal fade" id="quizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{quize.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save  changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <button 
+        class="btn btn-link modal-button"
+        data-pk="{{quize.pk}}"
+        data-quize="{{quize.name}}"
+        data-questions="{{quize.number_of_questions}}"
+        data-time="{{quize.time}}"
+        data-pass="{{quize.required_score}}"
+        data-toggle="modal" 
+        data-target="#quizeModal">
+
+        {{quize.name}}
+    </button>
+{% endfor %}
+
+
+{%endblock content%}

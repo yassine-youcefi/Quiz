@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar "
-    style="background-color:#44b78b !important;">
+    style="background-color:#0069d9 !important;">
     <a class="navbar-brand" href="">
         Yani
         <!-- <img src="/static/images/logo.jpeg" height="35"> -->
@@ -10,15 +10,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="{% url 'index' %}">Home<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="{% url 'about' %}" style="width: 930px;">About</a>
-            {%if user.is_authenticated%}
-            <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+            <a class="nav-item nav-link active" href="#">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{% url 'main:quize_list' %}" style="width: 930px;">Quizes</a>
+            <!-- {%if user.is_authenticated%}
+            <a class="nav-item nav-link" href="#">Profile</a>
+            <a class="nav-item nav-link" href="#">Logout</a>
             {%else%}
-            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-            <a class="nav-item nav-link" href="{%url 'sign_up'%}">Signup</a>
-            {%endif%}
+            <a class="nav-item nav-link" href="#">Login</a>
+            <a class="nav-item nav-link" href="#">Signup</a>
+            {%endif%} -->
         </div>
     </div>
 </nav>
