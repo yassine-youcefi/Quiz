@@ -7,14 +7,12 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with: 
-          persist-credentials: false   
+      - uses: actions/checkout@v2   
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '14'
       - name: Semantic release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
