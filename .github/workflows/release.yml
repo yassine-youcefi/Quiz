@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,5 +14,5 @@ jobs:
           node-version: '14'
       - name: Semantic release
         env:
-          GITHUB_TOKEN: ${{ secrets.QUIZ }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
