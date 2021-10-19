@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
+      - run: npm ci && npm run dist && npx semantic-release
         with:
           node-version: '14'
       - name: Semantic release
