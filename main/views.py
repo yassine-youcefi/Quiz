@@ -5,14 +5,17 @@ from django.views.generic import ListView
 # from rest_framework.views import APIView
 
 
+def index(request):
+    return render(request, 'templates/index.html')
 
-class QuizesList(ListView):
+class QuizzesList(ListView):
     model = Quiz
     template_name = 'templates/quizes.html'
  
 
-def quize_detail(request, pk):
+def quiz_detail(request, pk):
     context = {
-        'quize': Quiz.objects.get(pk=pk)
+        'quiz': Quiz.objects.get(pk=pk)
     }
     return render(request, 'templates/quize_details.html', context)        
+

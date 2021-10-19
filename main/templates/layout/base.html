@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- favicon  -->
-    <link rel="icon" href="{% static 'images/fav.png'%}" />
+    <link rel="icon" href="{% static 'images/logo.png'%}" />
 
     <!-- font awsome-->
     
@@ -25,31 +25,29 @@
     <!-- custom css     -->
     <link rel="stylesheet" type="text/css" href="{% static 'main.css'%}" />
 
-  
-
-
     
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
-    <title>quize app {%block title%} {%endblock title%} </title>
+    
+    <title>Quiz app {%block title%} {%endblock title%} </title>
     
   </head>
-
+  
   <body>
-   
+    
     {%include "sections/header.html" %}
     <div class="container " id='content' style="margin-top: 5rem;">
       {% block content %}
-        
+      
       {% endblock content %}
     </div>  
     {%include "sections/footer.html" %}
-
+    
       <!-- Optional JavaScript -->
-      
+      <script src="{% static 'main.js' %}" defer></script>
+    
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

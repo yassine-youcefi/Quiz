@@ -2,9 +2,24 @@ version: '3.4'
 
 services:
   quiz:
-    image: quiz
+    container_name: quize
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
+    command:
+      - bash
+      - -c
+      - "python3 manage.py runserver 0:8000"
+    env_file:
+      - credentials.env  
     ports:
-      - 8000:8000
+      - "0:8000:8000"
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true        
+
+
+
+
+    

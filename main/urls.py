@@ -1,13 +1,16 @@
 from django.urls import path
 from .views import (
-    QuizesList,
-    quize_detail
+    QuizzesList,
+    quiz_detail,
+    index
 )
 
 app_name = 'main'
 
 urlpatterns = [
-    path('',QuizesList.as_view() , name='quize_list'),
-    path('<int:pk>/', quize_detail, name='quize_detail'),
+    path('', index, name='index'),
+    path('quiz/',QuizzesList.as_view() , name='quiz_list'),
+    path('quiz/<int:pk>/', quiz_detail, name='quiz_detail'),
+
 ]
 

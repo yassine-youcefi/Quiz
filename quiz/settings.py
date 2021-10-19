@@ -55,14 +55,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-MIDDLEWARE_CLASSES = (
-    'livesync.core.middleware.DjangoLiveSyncMiddleware',
-)
+# MIDDLEWARE_CLASSES = (
+#     'livesync.core.middleware.DjangoLiveSyncMiddleware',
+# )
 
 
-DJANGO_LIVESYNC = {
-    'PORT': 8000 # this is optional and is default set to 9001.
-}
+# DJANGO_LIVESYNC = {
+#     'PORT': 8000 # this is optional and is default set to 9001.
+# }
 
 ROOT_URLCONF = 'quiz.urls'
 

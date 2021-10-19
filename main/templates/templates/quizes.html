@@ -1,11 +1,11 @@
 {% extends "layout/base.html" %}
 
 {% block title %}
-Quize list
+Quizzes list
 {% endblock title %}
 
 {% block content%}
-<h1>Quizes :</h1>
+<h1>Quizzes :</h1>
 <hr>
 {% for quize in object_list %}
 <!-- Modal -->
@@ -13,7 +13,7 @@ Quize list
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{quize.name}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Start quize ?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -22,8 +22,8 @@ Quize list
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save  changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Not yet</button>
+          <button type="button" id="start-button" class="btn btn-primary">Yes i'm ready</button>
         </div>
       </div>
     </div>
@@ -41,7 +41,9 @@ Quize list
 
         {{quize.name}}
     </button>
-{% endfor %}
+    <br>
 
+
+{% endfor %}
 
 {%endblock content%}
