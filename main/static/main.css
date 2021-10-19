@@ -11,3 +11,20 @@ body {
     background-color: #003140;
     color: #fff;
 }  
+
+#quize-submit-button {
+    background-color: #010409;
+    border-color: #fff;
+}
+
+hr {
+    border-color: #fff;
+}
+
+/* #quiz-div {
+    background-color: #fff;
+    color: #003140;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+} */

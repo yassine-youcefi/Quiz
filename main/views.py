@@ -31,6 +31,7 @@ def quiz_data(request, pk):
             answers.append(answer.text)
 
         questions.append({str(question):answers})
+    
     return JsonResponse({
         'questions': questions,
         'time' : quiz.time,
