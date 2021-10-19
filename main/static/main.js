@@ -1,5 +1,3 @@
-console.log('hellow');
-
 const modal = [...document.getElementsByClassName('modal-button')];
 const modalBody = document.getElementsByClassName('modal-body')[0];
 const start = document.getElementById('start-button');
@@ -31,3 +29,14 @@ modal.forEach(modal => modal.addEventListener('click', () => {
     
     })
 }))
+
+
+
+
+
+
+
+
+
+
+

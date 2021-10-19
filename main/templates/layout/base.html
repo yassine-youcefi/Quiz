@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   {%load static%}
+  {%block script%} {%endblock script%}  
+  
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -45,8 +47,7 @@
     </div>  
     {%include "sections/footer.html" %}
     
-      <!-- Optional JavaScript -->
-      <script src="{% static 'main.js' %}" defer></script>
+      
     
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script

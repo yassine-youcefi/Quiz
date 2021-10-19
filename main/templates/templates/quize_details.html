@@ -1,5 +1,12 @@
 {% extends "layout/base.html" %}
 
+{%load static%}
+{%block script%} 
+<!-- Optional JavaScript -->
+<script src="{% static 'quiz.js' %}" defer></script>
+{%endblock script%}
+
+
 {% block title %}
 {{quiz.name}}
 {% endblock title %}
