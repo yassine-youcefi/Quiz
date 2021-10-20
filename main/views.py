@@ -37,6 +37,7 @@ def quiz_data(request, pk):
 def quiz_result(request, pk):
     # check if the request is ajax 
     if request.is_ajax():
+        print(request.POST)
         questions = []
         results = []
         correct_answers = None
@@ -79,15 +80,19 @@ def quiz_result(request, pk):
                 # append the result to the results list if the answer is correct and not none
                 results.append({question.text : {'correct_answer': correct_answers, 'answered': selected_answer}})                  
             else:
-                results.append({question.text : 'awnser not found'}) 
+                # get the correct answer of the question
+                questins_of_answer = Answer.objects.filter(question=question) 
+                for answer in questins_of_answer:
+                    if answer.correct:
+                        correct_answer = answer.text 
+                results.append({question.text :  {'correct_answer': correct_answer, 'answered': 'awnser not found'}}) 
 
         # calculate the score 
         _score = score * multiple_answers
         # save the result to the database
         Result.objects.create(user=user, quiz=quiz, score=_score)
 
-        print('score ------ ', _score)
-        print('quiz.required_score ------ ', quiz.required_score)
+        
         if _score >= quiz.required_score:
             return JsonResponse({'passed': True, 'score': _score, 'results': results})
         else:

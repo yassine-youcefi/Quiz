@@ -13,8 +13,18 @@
 
 {% block content%}
 
-<h1>{{quiz.name.upper}} </h1>
-<p> score to pass: {{quiz.required_score}}%</p>
+<div class="row">
+    <div class="col">
+        <h1>{{quiz.name.upper}} </h1>
+        <b style="color: cornsilk ;"> score to pass: {{quiz.required_score}}%</b>
+    </div>
+    <div class="col text-right" style="color: cornsilk ;" id="time-div"></div>
+
+</div>
+<a href="{% url 'main:quiz_list' %}" class="link-danger" style="color: crimson ;" > go back</a>
+
+
+
 
 <hr>
 <h2 >Questions :</h2>

@@ -1,11 +1,61 @@
 
 const link = window.location.href;
 const quizDiv = document.getElementById('quiz-div');
+const timeDiv = document.getElementById('time-div');
 let data
 
 // _________/   for the get quiz request   \_________
 let myHeaders = new Headers();
 myHeaders.append('Content-Type', 'application/json');
+const activeTimer = (time) => {
+  
+
+  if (time.toString().length < 2) {
+    timeDiv.innerHTML = `<b>0${time}:00</b>`
+     
+  } else {
+    timeDiv.innerHTML = `<b>${time}:00</b>`
+
+  }
+  
+  let minutes = time-1;
+  let seconds = 60;
+  let displaySeconds 
+  let displayMinutes
+  const timer = setInterval(() => {
+      seconds -- 
+      if (seconds < 0) {
+        seconds = 59
+        minutes --
+      }
+      if (minutes.toString().length < 2) {
+        displayMinutes = '0'+minutes
+
+      }
+      else {
+        displayMinutes = minutes
+      }
+
+      if (seconds.toString().length < 2) {
+        displaySeconds = '0'+seconds
+      }
+      else {
+        displaySeconds = seconds
+      }
+
+      if ((minutes === 0) && (seconds === 0)) {
+        console.log('time is up')
+        alert('time is up')
+        submitButton() 
+
+
+          }
+
+      timeDiv.innerHTML = `<b>${displayMinutes}:${displaySeconds}</b>`    
+  }, 1000);
+  
+  
+}
 
 let requestOptions = {
     method: 'GET',
@@ -40,6 +90,7 @@ let requestOptions = {
         })
       }
     })
+    activeTimer(result.time);
   })
   .catch(error => console.log('error', error));  
  
@@ -101,7 +152,7 @@ const resulsDiv = document.getElementById('results-div');
       console.log('results = ', result);
 
 
-      scoreDiv.innerHTML = `<div>${result.passed ?  ' Congratulatons!  ' : 'Failed ... '} your results is ${result.score.toFixed(2)}% </div>`
+      scoreDiv.innerHTML = `${result.passed ?  '<div class="sucess"> Congratulatons! </div> ' : '<div class="failed"> Failed ...  </div>'} <div class="result"> your results is ${result.score.toFixed(2)}% </div>`
 
       // _________/   for the results page   \_________
       results.forEach(element => {
@@ -116,21 +167,21 @@ const resulsDiv = document.getElementById('results-div');
             responseDiv.classList.add('bg-danger');
           }
           else {
-            console.log('elements = ', element[question]);
+            console.log('element = ', element);
 
             const answer = element[question]['answered']; 
             const correct_answers = element[question]['correct_answer'];
-            
+         
             
             if (answer == correct_answers) {
               
               responseDiv.classList.add('bg-success');
               responseDiv.innerHTML += ` your answer is : ${answer}`
-        } else {
-              responseDiv.classList.add('bg-danger');
-              responseDiv.innerHTML += ` the correct answer is : ${correct_answers}`
-              responseDiv.innerHTML += ` answered : ${answer}`
-          }
+          } else {
+                responseDiv.classList.add('bg-danger');
+                responseDiv.innerHTML += ` the correct answer is : ${correct_answers}`
+                responseDiv.innerHTML += ` answered : ${answer}`
+            }
 
 
 

@@ -28,6 +28,27 @@ hr {
     padding: 10px;
     margin-bottom: 5px;
 } */
+.footer{
+    background-color:#010409 !important; 
+    margin-top: 30px;
+    margin-top: 15px;
+}
+
+/* .failed {
+    color: red;
+    margin: 20px;
+
+} */
+
+.result {
+    color: antiquewhite;
+
+}
+
+.success {
+    color : green;
+    margin: 20px;
+}
 
 .not-visible {
     display: none;
