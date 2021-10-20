@@ -15,7 +15,7 @@ jobs:
         uses: saadmk11/changelog-ci@v0.8.0
         with:
           changelog_filename: CHANGELOG.md
-          config_file: changelog-ci-config.json
+          # config_file: changelog-ci-config.json
         # Add this if you are using it on a private repository
         # Or if you have turned on commenting through the config file.
         env:
