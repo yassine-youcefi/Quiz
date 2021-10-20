@@ -86,6 +86,9 @@ const submitButton = () => {
   // })
   // .catch(error => console.log('error', error));
 
+const scoreDiv = document.getElementById('score-div');
+const resulsDiv = document.getElementById('results-div');
+
   $.ajax({
     url: link + 'results/',
     type: 'POST',
@@ -95,7 +98,10 @@ const submitButton = () => {
       const results = result.results;
       quizDetailsForm.classList.add('not-visible');
       console.log('quizDetailsForm.classList = ', quizDetailsForm.classList);
-      console.log('results = ', results);
+      console.log('results = ', result);
+
+
+      scoreDiv.innerHTML = `<div>${result.passed ?  ' Congratulatons!  ' : 'Failed ... '} your results is ${result.score.toFixed(2)}% </div>`
 
       // _________/   for the results page   \_________
       results.forEach(element => {
@@ -131,8 +137,9 @@ const submitButton = () => {
         }
       }
       const body = document.getElementById('form-div');
-      console.log('body = ',body)
-      body.append(responseDiv);
+      // console.log('body = ',body)
+      resulsDiv.append(responseDiv);
+
 
     })
       

@@ -55,7 +55,7 @@ def quiz_result(request, pk):
         user = request.user
         print("user = ",user)
         quiz = Quiz.objects.get(pk=pk)
-        multiple_answers = 100 / quiz.number_of_questions
+        multiple_answers = 100 / len(questions)
 
         # loop over questions 
         for question in questions:
@@ -86,6 +86,8 @@ def quiz_result(request, pk):
         # save the result to the database
         Result.objects.create(user=user, quiz=quiz, score=_score)
 
+        print('score ------ ', _score)
+        print('quiz.required_score ------ ', quiz.required_score)
         if _score >= quiz.required_score:
             return JsonResponse({'passed': True, 'score': _score, 'results': results})
         else:
