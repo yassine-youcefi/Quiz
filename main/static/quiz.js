@@ -45,8 +45,13 @@ const activeTimer = (time) => {
 
       if ((minutes === 0) && (seconds === 0)) {
         console.log('time is up')
-        alert('time is up')
-        submitButton() 
+        timeDiv.innerHTML = `<b>00:00</b>`
+        setTimeout(() => {
+          clearInterval(timer);
+          alert('time is up')
+          submitButton() 
+
+        },500)  
 
 
           }
@@ -152,7 +157,7 @@ const resulsDiv = document.getElementById('results-div');
       console.log('results = ', result);
 
 
-      scoreDiv.innerHTML = `${result.passed ?  '<div class="sucess"> Congratulatons! </div> ' : '<div class="failed"> Failed ...  </div>'} <div class="result"> your results is ${result.score.toFixed(2)}% </div>`
+      scoreDiv.innerHTML = `${result.passed ?  '<div class="sucess"> Congratulations! </div> ' : '<div class="failed"> Failed ...  </div>'} <div class="result"> your results is ${result.score.toFixed(2)}% </div>`
 
       // _________/   for the results page   \_________
       results.forEach(element => {

@@ -34,18 +34,19 @@ hr {
     margin-top: 15px;
 }
 
-/* .failed {
-    color: red;
+.failed {
     margin: 20px;
-
-} */
-
-.result {
-    color: antiquewhite;
+    color: red;
 
 }
 
-.success {
+.result {
+    color: antiquewhite;
+    margin: 20px;
+
+}
+
+.sucess {
     color : green;
     margin: 20px;
 }
