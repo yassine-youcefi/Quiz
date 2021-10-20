@@ -8,8 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - name: Semantic release
+      - uses: cycjimmy/semantic-release-action@v2
         with:
           extra_plugins: |
             @semantic-release/commit-analyzer
@@ -18,6 +17,8 @@ jobs:
             @semantic-release/git
             @saithodev/semantic-release-backmerge
             @semantic-release/exec
+      - name: Semantic release
+        
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
