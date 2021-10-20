@@ -4,7 +4,7 @@ from connect.models import User
 
 
 class Quiz(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, blank=True)
     topic = models.CharField(max_length=200)
     number_of_questions = models.IntegerField(default=0)
     time = models.IntegerField(help_text="Time in minutes", default=0)
