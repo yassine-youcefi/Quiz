@@ -4,7 +4,7 @@ const start = document.getElementById('start-button');
 const link = window.location.href;
 
 modal.forEach(modal => modal.addEventListener('click', () => {
-    console.log(modal);
+    // console.log(modal);
     const pk = modal.getAttribute('data-pk');
     const name = modal.getAttribute('data-quize');
     const numberQuestions = modal.getAttribute('data-questions')   

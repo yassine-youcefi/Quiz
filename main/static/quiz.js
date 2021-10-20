@@ -20,8 +20,8 @@ let requestOptions = {
     data.forEach(element => {
 
       for(const [question, answers] of Object.entries(element)){
-        console.log(question);
-        console.log(answers);
+        // console.log(question);
+        // console.log(answers);
         quizDiv.innerHTML += `
         <hr>
         <div class="mb-2">
@@ -91,12 +91,51 @@ const submitButton = () => {
     type: 'POST',
     data: data,
     success: function(result) {
-      console.log('result = ', result);
-      if (result.success) {
-        alert('Thank you for your time!')
-      } else {
-        alert('Please answer all the questions')
+
+      const results = result.results;
+      quizDetailsForm.classList.add('not-visible');
+      console.log('quizDetailsForm.classList = ', quizDetailsForm.classList);
+      console.log('results = ', results);
+
+      // _________/   for the results page   \_________
+      results.forEach(element => {
+        const responseDiv = document.createElement('div');
+        for (const [question, answer] of Object.entries(element)) {
+          responseDiv.innerHTML += question
+          const cls = ['contaier', 'p-3', 'text-light', 'h3']
+          responseDiv.classList.add(...cls);
+
+          if (element == 'awnser not found') {
+            responseDiv.innerHTML += 'awnser not found'
+            responseDiv.classList.add('bg-danger');
+          }
+          else {
+            console.log('elements = ', element[question]);
+
+            const answer = element[question]['answered']; 
+            const correct_answers = element[question]['correct_answer'];
+            
+            
+            if (answer == correct_answers) {
+              
+              responseDiv.classList.add('bg-success');
+              responseDiv.innerHTML += ` your answer is : ${answer}`
+        } else {
+              responseDiv.classList.add('bg-danger');
+              responseDiv.innerHTML += ` the correct answer is : ${correct_answers}`
+              responseDiv.innerHTML += ` answered : ${answer}`
+          }
+
+
+
+        }
       }
+      const body = document.getElementById('form-div');
+      console.log('body = ',body)
+      body.append(responseDiv);
+
+    })
+      
     },
     error: function(error) {
       console.log('error', error);

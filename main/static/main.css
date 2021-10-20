@@ -28,3 +28,28 @@ hr {
     padding: 10px;
     margin-bottom: 5px;
 } */
+
+.not-visible {
+    display: none;
+}
+
+.btnquiz {
+    background-color: #fff;
+    color: #003140;
+    border-color: #003140;
+    min-width: 200px ;
+    
+    margin : 5px 10px 
+}
+
+/* .modal {
+    background-color: #003140;
+} */
+
+.bg-success {
+    background-color: #010409;
+}
+
+/* #quiz-details-form {
+
+} */

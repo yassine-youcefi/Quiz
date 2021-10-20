@@ -8,18 +8,15 @@ from django.http import JsonResponse
 
 def index(request):
     return render(request, 'templates/index.html')
-
 class QuizzesList(ListView):
     model = Quiz
     template_name = 'templates/quizes.html'
- 
 
 def quiz_detail(request, pk):
     context = {
         'quiz': Quiz.objects.get(pk=pk)
     }
     return render(request, 'templates/quize_details.html', context)        
-
 
 def quiz_data(request, pk):
     quiz = Quiz.objects.get(pk=pk)
