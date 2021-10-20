@@ -1,23 +1,22 @@
-name: Semantic release
+name: "Hi"
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        uses: actions/create-release@v1
+    steps:
+      # Checks-out your repository
+      - uses: actions/checkout@v2
+
+      - name: Run Changelog CI
+        uses: saadmk11/changelog-ci@v0.8.0
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: ${{steps.github_release.outputs.changelog}}
+          changelog_filename: CHANGELOG.md
+          config_file: changelog-ci-config.json
+        # Add this if you are using it on a private repository
+        # Or if you have turned on commenting through the config file.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
