@@ -3,20 +3,22 @@
 {%load static%}
 {%block script%} 
 <!-- Optional JavaScript -->
-<script src="{% static 'main.js' %}" defer></script>
-{%endblock script%}
+<script src="{% static 'admin.js' %}" defer></script> -->
+ {%endblock script%}
 
 {% block title %}
-Quizzes list
+Admin
 {% endblock title %}
 
 {% block content%}
 <div class="row ">
   <h1 class="col-sm" >Quizzes : </h1>
+  <a class="nav-item nav-link" id="create_quiz" href="{% url 'main:quiz_create' %}">Create Quize</a>
 </div>
 
 <hr>
 <div class="row">
+
 {% for quize in object_list %}
 <!-- Modal -->
 <div class="modal fade " id="quizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -32,8 +34,8 @@ Quizzes list
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Not yet</button>
-          <button type="button" id="start-button" class="btn btn-success">Yes i'm ready</button>
+          <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
+          <button type="button" id="update-button" class="btn btn-success">Update</button>
         </div>
       </div>
     </div>

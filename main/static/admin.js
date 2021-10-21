@@ -1,6 +1,7 @@
 const modal = [...document.getElementsByClassName('modal-button')];
 const modalBody = document.getElementsByClassName('modal-body')[0];
-const start = document.getElementById('start-button');
+const updateQuiz = document.getElementById('update-button');
+const deleteQuiz = document.getElementById('delete-button');
 const link = window.location.href;
 
 modal.forEach(modal => modal.addEventListener('click', () => {
@@ -9,12 +10,11 @@ modal.forEach(modal => modal.addEventListener('click', () => {
     const name = modal.getAttribute('data-quize');
     const numberQuestions = modal.getAttribute('data-questions')   
     const time = modal.getAttribute('data-time')   
-    const pass = modal.getAttribute('data-pass') 
-    const questionsLength = modal.getAttribute('questions-length')  
+    const pass = modal.getAttribute('data-pass')   
 
     modalBody.innerHTML = `
 
-        <div class="h5 mb-3" >Ready to start  "<b>${name}</b>" ?</div>
+        <div class="h5 mb-3" >"<b>${name}</b>"</div>
         <div class="text-muted">
             <ul>
                 <li>number of questions :  <b>${numberQuestions}</b></li>
@@ -24,9 +24,15 @@ modal.forEach(modal => modal.addEventListener('click', () => {
         </div>
         
     `
-    start.addEventListener('click', () => {
+    updateQuiz.addEventListener('click', () => {
         
-        window.location.href = link  + pk 
+        window.location.href = link  + pk + '/update/'
+    
+    })
+
+    deleteQuiz.addEventListener('click', () => {
+        
+        window.location.href = link  + pk + '/delete/'
     
     })
 }))

@@ -16,13 +16,16 @@ class QuizEditForm(ModelForm):
         fields = ['name', 'topic', 'number_of_questions', 'time', 'required_score']
 
 # # create form for Question model (create question)
-# class QuestionForm(ModelForm):
-#     class Meta:
-#         model = Question
-#         fields = '__all__'
+class QuestionForm(ModelForm):
+    class Meta:
+        model = Question
+        fields = '__all__'
 
 # # create form for Answer model (create answer)
 # class AnswerForm(ModelForm):
 #     class Meta:
 #         model = Answer
 #         fields = '__all__'
+
+# crete form for delete quiz
+

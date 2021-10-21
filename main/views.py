@@ -1,27 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import User, Quiz, Question, Answer, Result
 from django.views.generic import ListView
 from django.http import JsonResponse, HttpResponseRedirect
-from .forms import QuizForm, QuizEditForm
+from .forms import QuizForm, QuizEditForm,QuestionForm
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+
 
 # from rest_framework.views import APIView
 
 
 def index(request):
     return render(request, 'templates/index.html')
+
 class QuizzesList(ListView):
     model = Quiz
-    template_name = 'templates/quizes.html'
+    template_name = 'templates/quizzes.html'
+class QuizzesListAdmin(ListView):
+    model = Quiz
+    template_name = 'templates/admin_quizzes.html'    
+
 
 def quiz_detail(request, pk):
+    questions_length = get_object_or_404(Quiz, pk=pk).get_questions().count()
+    print("questions_length = ",questions_length)
     context = {
-        'quiz': Quiz.objects.get(pk=pk)
+        'questions_length' : questions_length,
+        'quiz': get_object_or_404(Quiz, pk=pk)
     }
     return render(request, 'templates/quize_details.html', context)        
 
 def quiz_data(request, pk):
-    quiz = Quiz.objects.get(pk=pk)
+    quiz = get_object_or_404(Quiz, pk=pk)
     questions = []
     for question in quiz.get_questions():
         # questions.append(qu estion.text)
@@ -52,14 +63,17 @@ def quiz_result(request, pk):
         
         # append all post data questions to the questions list
         for key in data.keys():
-            question = Question.objects.get(text=key)
+            get_object_or_404(Quiz, pk=pk)
+            question = get_object_or_404(Question, text=key)
             questions.append(question)
 
         user = request.user
         print("user = ",user)
         quiz = Quiz.objects.get(pk=pk)
-        multiple_answers = 100 / len(questions)
-
+        try:
+            multiple_answers = 100 / len(questions)
+        except ZeroDivisionError:
+            multiple_answers = 0
         # loop over questions 
         for question in questions:
             # get the selected answer
@@ -107,7 +121,9 @@ def quiz_create(request):
         
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.success(
+                request, f'Quiz is create successfuly for ')
+            return redirect('main:quiz_list_admin')
         else:
             print("form not valid")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
@@ -118,10 +134,18 @@ def quiz_create(request):
 # for admin only
 def quiz_update(request, pk):
     if request.method == 'POST':
-        form = QuizEditForm(request.POST)
+        quiz = get_object_or_404(Quiz, pk=pk)
+        print("quiz = ",str(quiz))
+
+        form = QuizEditForm(request.POST, instance=quiz)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            obj = form.save(commit= False)
+            obj.save()
+            messages.success(
+            request, f'Quiz is updated successfuly for {quiz.name}')
+            context= {'form': form}
+
+            return redirect('main:quiz_list_admin')
         else:
             print("form not valid")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -135,3 +159,37 @@ def quiz_update(request, pk):
             'form': form
         }
         return render(request, 'templates/quiz_update.html', context)
+
+# create view for delete quiz
+def quize_delete(request,pk):
+    if request.method == 'POST':
+        quiz = get_object_or_404(Quiz, pk=pk)
+        quiz.delete()
+        messages.success(
+            request, f'Quiz is deleted successfuly for {quiz.name}')
+        return redirect('main:quiz_list_admin')
+    else:
+        quiz = Quiz.objects.get(pk=pk)
+        context = {'quiz' : quiz}
+        return render(request, 'templates/quiz_delete.html', context)
+
+
+# create view that allow to create question for quiz 
+def question_create(request, pk):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        print("pk = ",pk)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, f'Question is create successfuly for ')
+            return redirect('main:quiz_detail', pk=pk)
+        else:
+            print("form not valid")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
+    if request.method == 'GET':
+        quiz = get_object_or_404(Quiz, pk=pk)
+        form = QuestionForm()
+        context = {'form': form
+                ,'quiz': quiz}
+    return render(request, 'templates/question_create.html',context=context )

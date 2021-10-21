@@ -1,0 +1,30 @@
+{% extends "layout/base.html" %}
+
+
+{% block title %}
+    Delete Quiz
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="h1-delete">
+                Delete Quiz <b>{{quiz.name}}</b> </h1>
+            </div>
+        </div>
+        
+        
+        <form action="" method="POST">
+        {% csrf_token %}
+        <h5 class="modal-title" id="h5-delete" >Are you sure to delete <b>{{quiz.name}}</b> Quiz ?</h5>
+
+        <button type="submit"  value="delete Post" class="btn btn-danger">Delete</button>
+
+        </form>
+        <br/><br/>
+
+        
+    </div>
+{% endblock %}

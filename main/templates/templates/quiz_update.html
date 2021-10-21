@@ -9,17 +9,31 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1>Update {{quiz.name}} Quiz</h1>
-            </div>
+            <h1 class="col-sm" >Update {{quiz.name}} Quiz</h1>
+            <a class="nav-item nav-link" id="create_quiz" href="{{request.url}} question/create/">Create Questions</a>
         </div>
-        <form action="{% url 'main:quiz_create' %}" method="post">
+        
+        <hr>
+        <div class="row"></div>
+            {% if error %}
+                {{ error }}-
+            {% endif %}
+            
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <input type="submit" value="Edit Post"/>
+            </form>
+         </div>
+        <br/><br/>
+
+        <!-- <form action="{% url 'main:quiz_create' %}" method="post">
             {% csrf_token %}
             <div class="content" id="create-quize">
                 {% crispy form %}
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit"  value="Edit Post" class="btn btn-primary">Update</button>
             </div>    
-        </form>
+        </form> -->
     </div>
 {% endblock %}

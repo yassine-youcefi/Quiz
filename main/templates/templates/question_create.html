@@ -12,9 +12,10 @@ helloworld
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="col-sm">Create a new quiz</h1>
+            <h1 class="col-sm">Create a new question for {{quiz.name}}</h1>
         </div>
-        <hr>
+
+    <hr>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -23,7 +24,7 @@ helloworld
                 <div class="content" id="create-quize">
                     {% crispy form %}
 
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary" style="margin: 30px;">Create</button>
                 </div>    
             </form>
         </div>

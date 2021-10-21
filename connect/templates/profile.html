@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {%load static%}
 
-{% block extrahead %}
+{% block style %}
 <link rel="stylesheet" type="text/css" href="{% static 'main.css'%}" />
 {% endblock %}
 
@@ -24,21 +24,43 @@ padding-left: 25px;">
     <fieldset  class="form-group" style="justify-content: center;">
       <legend  class="border-bottom mb-4 "> User infos </legend>
       
+
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" value="{{user.username}}" >
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" >
+      </div> 
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" class="form-control" id="image" name="image" value="{{user.profile.image}}" >
+      </div>
+     <!-- ceare div for user.profile.age -->
+     <div class="form-group" >
+       <label for="age">Age</label>
+       <input type="number" class="form-control" id='age' name="age" value="{{user.profile.age}}" > 
+     </div>
+
       <!-- {% crispy user_form %} -->
-      {% for field in user_form %}
+      <!-- {% for field in user_form %}
         <div class="fieldWrapper">
+          
             {{ field.errors }}
             {{ field.label_tag }} {{ field }}
-        </div>
+
+          </div>
       {% endfor %}
-      
+       -->
       <!-- {% crispy profile_form %} -->
-      {% for field in profile_form %}
+      <!-- {% for field in profile_form %}
           <div class="fieldWrapper">
               {{ field.errors }}
               {{ field.label_tag }} {{ field }}
           </div>
-      {% endfor %}
+      {% endfor %} -->
 
 
     </fieldset>

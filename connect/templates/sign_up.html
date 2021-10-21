@@ -1,27 +1,50 @@
 {% extends "layout/base.html" %} {% block content%}
 {% load crispy_forms_tags %}
 <div class="content-section">
-    <form action="" method="POST">
-        {% csrf_token %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}    
         <fieldset class="form-group">
             <legend class="border-bottom mb-4"> Sign up Todey</legend>
-            <!-- {% crispy form %} -->
-            {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
-                </div>
-            {% endfor %}
-        </fieldset>
+            
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email" >
+              </div> 
+              <!-- <div>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password">
+            </div>
+            <div>
+                <label for="password">Password confirmation</label>
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Enter password confirmation">
+            </div> -->
+        <div>
+            <label for="password">{{form.password1.label}}</label>
+            <div class="form">
+                {{form.password1}}
+            </div>
+        </div>
+        <div>
+            <label for="password">{{form.password2.label}}</label>
+            <div class="form">
+                {{form.password2}}
+            </div>
+        </div>
+            </fieldset>
         <div class="form-group">
-            <button class="btn btn-onlige-info" type="submit" style="background-color:#0c4b33; color:#fff">
+            <button class="btn btn-onlige-info" type="submit" style="background-color:#010409; color:#fff">
                 Sign up
             </button>
         </div>
     </form>
     <div class="border-top py-3">
         <small class="text-muted">
-            I have An Account !<a href="{% url 'login'%}" class="ml-2">Login</a>
+            I have An Account !<a href="{% url 'login'%}" class="ml-2" >Login</a>
         </small>
     </div>
 </div>

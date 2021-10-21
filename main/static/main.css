@@ -80,3 +80,21 @@ hr {
     justify-content: center;
     align-items: center;
 }
+
+#h1-delete {
+    margin: 20px;
+}
+
+#h5-delete {
+    margin: 20px;
+}
+
+#create_quiz {
+    
+    background-color: #003140;
+    color: #fff;
+    border-color: #fff;
+    min-width: 100px ;
+    margin : 5px 10px ;
+    
+}
