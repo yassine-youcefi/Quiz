@@ -1,5 +1,6 @@
 asgiref==3.2.10
 Django==3.1.1
+django-crispy-forms==1.13.0
 django-filter==21.1
 django3-livesync==1
 djangorestframework==3.12.4
@@ -10,3 +11,7 @@ sqlparse==0.4.2
 tornado==6.1
 watchdog==2.1.6
 websocket-client==1.2.1
+Pillow==8.2.0
+typing-extensions==3.10.0.0
+django-storages
+boto3

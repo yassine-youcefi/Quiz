@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User, Quiz, Question, Answer, Result
 from django.views.generic import ListView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
+from .forms import QuizForm, QuizEditForm
+
 # from rest_framework.views import APIView
 
 
@@ -98,4 +100,38 @@ def quiz_result(request, pk):
         else:
             return JsonResponse({'passed': False,'score': _score, 'results': results})   
 
-    
+# for admin only
+def quiz_create(request):
+    if request.method == 'POST':
+        form = QuizForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            print("form not valid")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
+    if request.method == 'GET':
+        form = QuizForm()
+    return render(request, 'templates/quiz_create.html', {'form': form})
+
+# for admin only
+def quiz_update(request, pk):
+    if request.method == 'POST':
+        form = QuizEditForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            print("form not valid")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    else:
+        quiz = Quiz.objects.get(pk=pk)
+        form = QuizEditForm(instance=quiz) 
+
+        context = {
+            'quiz': quiz,
+            'form': form
+        }
+        return render(request, 'templates/quiz_update.html', context)

@@ -1,0 +1,34 @@
+{% extends "layout/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+
+helloworld
+
+{% endblock title %}
+
+{% block content%}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Create a new quiz</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="{% url 'main:quiz_create' %}" method="post">
+                {% csrf_token %}
+                <div class="content" id="create-quize">
+                    {% crispy form %}
+
+                <button type="submit" class="btn btn-primary">Create</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock content%}

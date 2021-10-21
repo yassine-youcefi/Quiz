@@ -8,6 +8,7 @@ from rest_framework import routers, serializers, viewsets
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
+    path('user/', include('connect.urls')),
     path('api-auth/', include('rest_framework.urls'))
 ]
 

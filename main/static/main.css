@@ -75,3 +75,8 @@ hr {
 /* #quiz-details-form {
 
 } */
+
+.create-quize {
+    justify-content: center;
+    align-items: center;
+}

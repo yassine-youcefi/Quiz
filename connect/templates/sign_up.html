@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %} {% block content%}
+{% load crispy_forms_tags %}
+<div class="content-section">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> Sign up Todey</legend>
+            <!-- {% crispy form %} -->
+            {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                </div>
+            {% endfor %}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-onlige-info" type="submit" style="background-color:#0c4b33; color:#fff">
+                Sign up
+            </button>
+        </div>
+    </form>
+    <div class="border-top py-3">
+        <small class="text-muted">
+            I have An Account !<a href="{% url 'login'%}" class="ml-2">Login</a>
+        </small>
+    </div>
+</div>
+{%endblock content%}

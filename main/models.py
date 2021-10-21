@@ -2,6 +2,11 @@ from django.db import models
 from connect.models import User
 # from django.contrib.auth.models import User
 
+QUESTION_TYPE = (
+        ('MCQ', 'Multiple Choice'),
+        ('TF', 'True or False'),
+        ('FIB', 'Fill in the Blank'),)
+        
 
 class Quiz(models.Model):
     name = models.CharField(max_length=200, blank=True)
@@ -18,6 +23,7 @@ class Quiz(models.Model):
         return self.question.all()[:self.number_of_questions]
 
 class Question(models.Model):
+    question_type = models.CharField(max_length=50, choices=QUESTION_TYPE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="question")
     text = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,6 +36,7 @@ class Question(models.Model):
         return self.answer.all()
 
 class Answer(models.Model):
+    User = models.ForeignKey(User, on_delete=models.CASCADE, related_name="usrt_answer")
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
     text = models.CharField(max_length=200)
     correct = models.BooleanField(default=False)

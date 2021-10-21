@@ -1,18 +1,28 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+from PIL import Image
+
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username  = models.CharField(max_length=100, blank=True)
-    first_name = models.CharField(max_length=100, blank=True)
-    last_name = models.CharField(max_length=100, blank=True)
-    email     = models.EmailField(max_length=100, blank=True)
-    phone     = models.CharField(max_length=100, blank=True)
-    address   = models.CharField(max_length=100, blank=True)
-    zipcode   = models.CharField(max_length=100, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, blank=True, null=True)
+    address = models.CharField(max_length=100, default="")
+    age = models.IntegerField(null=True, blank=True)
+    GENDER_MALE = 0
+    GENDER_FEMALE = 1
+    GENDER_CHOICES = [(GENDER_MALE, 'Male'), (GENDER_FEMALE, 'Female')]
+    gender = models.IntegerField(choices=GENDER_CHOICES, null=True, blank=True)
+    image = models.ImageField(upload_to='profile_pics', default='default.png')
+    # image = models.FileField()
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+    def save(self):
+        super().save()
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            image_size = (300, 300)
+            img.thumbnail(image_size)
+            img.save(self.image.path)
