@@ -4,13 +4,15 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
-
+from main.models import User
+from django.shortcuts import get_list_or_404
+# from .decorators import unauthenticated_user
 
 @csrf_exempt
+# @unauthenticated_user
 def sign_up(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
-        print('form >> ',form.errors)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -18,8 +20,22 @@ def sign_up(request):
                 request, f'Account is create successfuly for {username}')
             return redirect('login')
     else:
-        form = UserRegisterForm()
-    return render(request, 'sign_up.html', {'form': form})
+        if request.user.is_authenticated:
+            return redirect('main:index')
+        else:
+            groups = []    
+            form = UserRegisterForm()
+            users = User.objects.all()
+            for index, user in enumerate(users) :
+                print('user ',user.groups.all()[0].name)
+                if user.groups.all()[0] not in groups:
+                    groups.append({"name":user.groups.all()[0].name, "index":index})
+            print('groups = ',groups)
+            context = {
+                    'form': form,
+                    'groups' : groups
+            }
+        return render(request, 'sign_up.html', context=context)
 
 
 @login_required

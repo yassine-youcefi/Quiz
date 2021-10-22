@@ -9,3 +9,8 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         print("Quiz questions ", instance.get_questions())
         
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        instance.groups.add(Group.objects.get(name='group_name'))        

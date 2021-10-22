@@ -6,20 +6,32 @@ from django.http import JsonResponse, HttpResponseRedirect
 from .forms import QuizForm, QuizEditForm,QuestionForm
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from .decorators import allowed_users
 
 
 # from rest_framework.views import APIView
 
 
 def index(request):
-    return render(request, 'templates/index.html')
+    user_group = []
+    for group in request.user.groups.all():
+        user_group.append(group.name)
 
+    context = {
+        "user_group" : user_group,
+    }    
+    return render(request, 'templates/index.html', context=context)
+
+# __________/ for students \____________
 class QuizzesList(ListView):
     model = Quiz
     template_name = 'templates/quizzes.html'
+
+# __________/ for admin \____________
 class QuizzesListAdmin(ListView):
     model = Quiz
     template_name = 'templates/admin_quizzes.html'    
+
 
 
 def quiz_detail(request, pk):
@@ -114,7 +126,6 @@ def quiz_result(request, pk):
         else:
             return JsonResponse({'passed': False,'score': _score, 'results': results})   
 
-# for admin only
 def quiz_create(request):
     if request.method == 'POST':
         form = QuizForm(request.POST)
@@ -131,7 +142,6 @@ def quiz_create(request):
         form = QuizForm()
     return render(request, 'templates/quiz_create.html', {'form': form})
 
-# for admin only
 def quiz_update(request, pk):
     if request.method == 'POST':
         quiz = get_object_or_404(Quiz, pk=pk)
@@ -160,7 +170,6 @@ def quiz_update(request, pk):
         }
         return render(request, 'templates/quiz_update.html', context)
 
-# create view for delete quiz
 def quize_delete(request,pk):
     if request.method == 'POST':
         quiz = get_object_or_404(Quiz, pk=pk)
@@ -174,7 +183,6 @@ def quize_delete(request,pk):
         return render(request, 'templates/quiz_delete.html', context)
 
 
-# create view that allow to create question for quiz 
 def question_create(request, pk):
     if request.method == 'POST':
         form = QuestionForm(request.POST)

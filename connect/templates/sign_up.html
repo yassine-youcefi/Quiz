@@ -10,42 +10,44 @@
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="username">
-              </div>
-              <div>
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="email" >
-              </div> 
-              <!-- <div>
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password">
             </div>
             <div>
-                <label for="password">Password confirmation</label>
-                <input type="password" class="form-control" id="password2" name="password2" placeholder="Enter password confirmation">
-            </div> -->
-        <div>
-            <label for="password">{{form.password1.label}}</label>
-            <div class="form">
-                {{form.password1}}
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email" >
+            </div> 
+            <div>
+                <label for="groups">{{form.groups.label}}</label>
+                <select id='select-groups' class="browser-default custom-select" name="groups">
+                    {% for group in groups  %}    
+
+                    <option value="{{group.index}}">{{group.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>  
+
+            <div>
+                <label for="password">{{form.password1.label}}</label>
+                <div class="form">
+                    {{form.password1}}
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="password">{{form.password2.label}}</label>
-            <div class="form">
-                {{form.password2}}
+            <div>
+                <label for="password">{{form.password2.label}}</label>
+                <div class="form">
+                    {{form.password2}}
+                </div>
             </div>
-        </div>
-            </fieldset>
+        </fieldset>
         <div class="form-group">
             <button class="btn btn-onlige-info" type="submit" style="background-color:#010409; color:#fff">
                 Sign up
             </button>
         </div>
     </form>
-    <div class="border-top py-3">
-        <small class="text-muted">
-            I have An Account !<a href="{% url 'login'%}" class="ml-2" >Login</a>
-        </small>
-    </div>
+            <div class="border-top py-3">
+                <small class="text-muted">
+                    I have An Account !<a href="{% url 'login'%}" class="ml-2" >Login</a>
+                </small>
+            </div>
 </div>
 {%endblock content%}
