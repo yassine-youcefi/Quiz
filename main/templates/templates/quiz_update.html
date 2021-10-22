@@ -15,14 +15,42 @@
         
         <hr>
         <div class="row"></div>
-            {% if error %}
-                {{ error }}-
-            {% endif %}
-            
             <form action="" method="POST">
                 {% csrf_token %}
-                {{ form.as_p }}
-            <input type="submit" value="Edit Post"/>
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter quiz name">
+                </div>
+
+                <div>
+                    <label for="topic">Topic</label>
+                    <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter quiz topic">
+                </div>
+
+                <div>
+                    <label for="number_of_questions">Number of questions</label>
+                    <input type="number" class="form-control" id="number-of-questions" name="id_number_of_questions" placeholder="Enter quiz number of questions">
+                </div>
+
+                <div>
+                    <label for="time">Time </label>
+                    <input type="number" class="form-control" id="time" name="time" placeholder="Enter quiz time">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="score">Score </label>
+                    <input type="number" class="form-control" id="score" name="score" placeholder="Enter quiz store">
+                </div>        
+
+
+
+
+
+
+
+                <button class="btn btn-success" type="submit" >
+                    Update
+                </button>            
             </form>
          </div>
         <br/><br/>

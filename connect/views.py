@@ -23,14 +23,16 @@ def sign_up(request):
         if request.user.is_authenticated:
             return redirect('main:index')
         else:
-            groups = []    
+            groups = [{'name' : 'admin','index':0},{'name' : 'students  ','index':1}]    
             form = UserRegisterForm()
             users = User.objects.all()
-            for index, user in enumerate(users) :
-                print('user ',user.groups.all()[0].name)
-                if user.groups.all()[0] not in groups:
-                    groups.append({"name":user.groups.all()[0].name, "index":index})
+            # for index, user in enumerate(users) :
+            #     print('user ',user.filter(groups__name='admin'))
+            #     if users.groups.all()[0] not in groups:
+            #         groups.append({"name":users.groups.all()[0].name, "index":index})
+
             print('groups = ',groups)
+
             context = {
                     'form': form,
                     'groups' : groups

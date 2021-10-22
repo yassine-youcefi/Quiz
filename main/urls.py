@@ -9,6 +9,7 @@ from .views import (
     quiz_update, 
     quize_delete,
     question_create,
+    quiz_detail_admin,
     index
 )
 
@@ -26,5 +27,6 @@ urlpatterns = [
     path('quiz/admin/<int:pk>/update/', quiz_update, name='quiz_update'),
     path('quiz/admin/<int:pk>/delete/', quize_delete, name='quiz_delete'),
     path('quiz/admin/<int:pk>/update/question/create/', question_create, name='question_create'),
+    path('quiz/<int:pk>/admin/', quiz_detail_admin, name='quiz_detail_admin'),
 ]
 

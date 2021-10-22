@@ -98,3 +98,13 @@ hr {
     margin : 5px 10px ;
     
 }
+
+#quit_question{
+    border-color: #fff;
+    background-color: #003140;
+    color: red;
+    border-color: #fff;
+    min-width: 100px ;
+    margin : 5px 10px ;
+    
+} 

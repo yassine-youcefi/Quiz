@@ -5,8 +5,9 @@ from django.views.generic import ListView
 from django.http import JsonResponse, HttpResponseRedirect
 from .forms import QuizForm, QuizEditForm,QuestionForm
 from django.contrib import messages
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from .decorators import allowed_users
+from django.urls import reverse
 
 
 # from rest_framework.views import APIView
@@ -33,7 +34,7 @@ class QuizzesListAdmin(ListView):
     template_name = 'templates/admin_quizzes.html'    
 
 
-
+# __________/ for quiz details \____________
 def quiz_detail(request, pk):
     questions_length = get_object_or_404(Quiz, pk=pk).get_questions().count()
     print("questions_length = ",questions_length)
@@ -43,6 +44,15 @@ def quiz_detail(request, pk):
     }
     return render(request, 'templates/quize_details.html', context)        
 
+def quiz_detail_admin(request, pk):
+    quiz = Quiz.objects.get(pk=pk, admin=request.user)
+    context = {
+        'quiz': quiz
+    }
+    return render(request, 'templates/quiz_details_admin.html', context)
+
+
+# __________/ for quiz options \____________
 def quiz_data(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
     questions = []
@@ -62,7 +72,6 @@ def quiz_data(request, pk):
 def quiz_result(request, pk):
     # check if the request is ajax 
     if request.is_ajax():
-        print(request.POST)
         questions = []
         results = []
         correct_answers = None
@@ -80,7 +89,6 @@ def quiz_result(request, pk):
             questions.append(question)
 
         user = request.user
-        print("user = ",user)
         quiz = Quiz.objects.get(pk=pk)
         try:
             multiple_answers = 100 / len(questions)
@@ -126,19 +134,24 @@ def quiz_result(request, pk):
         else:
             return JsonResponse({'passed': False,'score': _score, 'results': results})   
 
+
+# __________/ for quiz options \____________
 def quiz_create(request):
     if request.method == 'POST':
         form = QuizForm(request.POST)
-        
+        form.instance.admin = request.user
         if form.is_valid():
+            form.changed_data
             form.save()
+            pk = form.instance.id
             messages.success(
                 request, f'Quiz is create successfuly for ')
-            return redirect('main:quiz_list_admin')
+            return redirect('main:question_create', pk=pk)    
         else:
-            print("form not valid")
+            messages.success(request, f'Failed to create Quiz ')           
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
     if request.method == 'GET':
+
         form = QuizForm()
     return render(request, 'templates/quiz_create.html', {'form': form})
 
@@ -183,21 +196,35 @@ def quize_delete(request,pk):
         return render(request, 'templates/quiz_delete.html', context)
 
 
+# __________/ for question options \____________
 def question_create(request, pk):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         print("pk = ",pk)
+        form.instance.quiz = get_object_or_404(Quiz, pk=pk)
+
         if form.is_valid():
             form.save()
             messages.success(
                 request, f'Question is create successfuly for ')
-            return redirect('main:quiz_detail', pk=pk)
+            return redirect('main:quiz_detail_admin', pk=pk)
         else:
             print("form not valid")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
+            return redirect('main:quiz_detail_admin', pk=pk)    
     if request.method == 'GET':
-        quiz = get_object_or_404(Quiz, pk=pk)
+        form = QuestionForm(request.POST)
         form = QuestionForm()
-        context = {'form': form
-                ,'quiz': quiz}
+        quiz = Quiz.objects.all()
+        quiz_choice = []
+        for q in quiz:
+            if q.id == pk:
+                quiz_choice.append(q.id)
+                quiz_choice.append(q.name)
+        print("quiz_choice = ",quiz_choice)
+        context = {
+            'form': form,
+            'quiz': quiz,
+            'quiz_choice': quiz_choice
+            }
     return render(request, 'templates/question_create.html',context=context )
+

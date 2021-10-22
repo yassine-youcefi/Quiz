@@ -13,18 +13,47 @@ helloworld
     <div class="row">
         <div class="col-md-12">
             <h1 class="col-sm">Create a new question for {{quiz.name}}</h1>
+            <a class="nav-item nav-link" id="quit_question" href="{% url 'main:quiz_list_admin' %}">Quit</a>
+            <hr>
         </div>
+
+       
 
     <hr>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form action="{% url 'main:quiz_create' %}" method="post">
+            <form action="" method="post">
                 {% csrf_token %}
                 <div class="content" id="create-quize">
-                    {% crispy form %}
+                    <!-- {% crispy form %} -->
+                    <div class="form-group">
+                    <label for="question_type">{{ form.question_type.label}}</label>
+                    {{ form.question_type}}    
 
-                <button type="submit" class="btn btn-primary" style="margin: 30px;">Create</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">{{form.text.label}}</label>
+                    <input type="text" class="form-control" id="text" name="text" placeholder=" write answer choise text">
+                </div>
+
+                <div class="form-group">
+                    <!-- <label for="quiz_choice">{{form.quiz.label}}</label>
+                    <select id='quiz_choice' class="browser-default custom-select" name="quiz_choice">
+                        <option value="{{quiz_choice.0}}">{{quiz_choice.1}}</option>
+                        
+                    </select> -->
+                    <!-- {{ form.quiz }} -->
+
+                </div>
+                
+
+
+
+
+
+                <button type="submit" class="btn btn-success" style="margin: 30px;">Create</button>
                 </div>    
             </form>
         </div>

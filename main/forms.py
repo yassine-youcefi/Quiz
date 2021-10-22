@@ -7,8 +7,9 @@ from .models import Quiz, Question, Answer
 class QuizForm(ModelForm):
     class Meta:
         model = Quiz
-        fields = ['name', 'topic', 'number_of_questions', 'time', 'required_score']
+        fields = [ 'name', 'topic', 'number_of_questions', 'time', 'required_score']
 
+    
 # cerate form for Quiz model (edit quiz)
 class QuizEditForm(ModelForm):
     class Meta:
@@ -19,7 +20,7 @@ class QuizEditForm(ModelForm):
 class QuestionForm(ModelForm):
     class Meta:
         model = Question
-        fields = '__all__'
+        fields = ['question_type', 'text']
 
 # # create form for Answer model (create answer)
 # class AnswerForm(ModelForm):

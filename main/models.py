@@ -9,6 +9,7 @@ QUESTION_TYPE = (
         
 
 class Quiz(models.Model):
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=True)
     topic = models.CharField(max_length=200)
     number_of_questions = models.IntegerField(default=0)
