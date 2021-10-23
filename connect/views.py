@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
 from main.models import User
+from django.contrib.auth.models import Group
 from django.shortcuts import get_list_or_404
 # from .decorators import unauthenticated_user
 
@@ -12,24 +14,31 @@ from django.shortcuts import get_list_or_404
 # @unauthenticated_user
 def sign_up(request):
     if request.method == 'POST':
+        
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+
+            user_group = form.cleaned_data.get('groups')[0].name
+            
+            group = Group.objects.get(name=user_group)
+
+            user = User.objects.get(username=username)
+            group.user_set.add(user)
             messages.success(
                 request, f'Account is create successfuly for {username}')
             return redirect('login')
+        else :
+            messages.error(request, f'Account is not create successfuly')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))     
     else:
         if request.user.is_authenticated:
             return redirect('main:index')
         else:
-            groups = [{'name' : 'admin','index':0},{'name' : 'students  ','index':1}]    
+            groups = [{'name' : 'admin','index':1},{'name' : 'students  ','index':2}]    
             form = UserRegisterForm()
             users = User.objects.all()
-            # for index, user in enumerate(users) :
-            #     print('user ',user.filter(groups__name='admin'))
-            #     if users.groups.all()[0] not in groups:
-            #         groups.append({"name":users.groups.all()[0].name, "index":index})
 
             print('groups = ',groups)
 

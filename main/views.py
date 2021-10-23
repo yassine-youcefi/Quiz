@@ -10,6 +10,7 @@ from .decorators import allowed_users
 from django.urls import reverse
 
 
+
 # from rest_framework.views import APIView
 
 
@@ -17,7 +18,7 @@ def index(request):
     user_group = []
     for group in request.user.groups.all():
         user_group.append(group.name)
-
+    print("user_group = ",user_group)
     context = {
         "user_group" : user_group,
     }    
@@ -158,7 +159,6 @@ def quiz_create(request):
 def quiz_update(request, pk):
     if request.method == 'POST':
         quiz = get_object_or_404(Quiz, pk=pk)
-        print("quiz = ",str(quiz))
 
         form = QuizEditForm(request.POST, instance=quiz)
         if form.is_valid():
