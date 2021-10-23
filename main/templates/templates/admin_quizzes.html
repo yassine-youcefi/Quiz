@@ -13,51 +13,51 @@ Admin
 {% block content%}
 <div class="row ">
   <h1 class="col-sm" >Quizzes : </h1>
-  <a class="nav-item nav-link" id="create_quiz" href="{% url 'main:quiz_create' %}">Create Quize</a>
+  <a class="nav-item nav-link" id="create_quiz" href="{% url 'main:quiz_create' %}">Create quiz</a>
 </div>
 
 <hr>
 <div class="row">
 
-{% for quize in object_list %}
-<!-- Modal -->
-<div class="modal fade " id="quizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Start quize ?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+{% for quiz in object_list %}
+  {% if request.user == quiz.admin %}
+    <!-- Modal -->
+    <div class="modal fade " id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Start quiz ?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modal-confirm">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
+              <button type="button" id="update-button" class="btn btn-success">Update</button>
+            </div>
+          </div>
         </div>
-        <div class="modal-body" id="modal-confirm">
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
-          <button type="button" id="update-button" class="btn btn-success">Update</button>
-        </div>
-      </div>
     </div>
-  </div>
-
-  
+    
     <button 
         class="btn btn-link modal-button btnquiz col-sm"
-        data-pk="{{quize.pk}}"
-        data-quize="{{quize.name}}"
-        data-questions="{{quize.number_of_questions}}"
-        data-time="{{quize.time}}"
-        data-pass="{{quize.required_score}}"
+        data-pk="{{quiz.pk}}"
+        data-quize="{{quiz.name}}"
+        data-questions="{{quiz.number_of_questions}}"
+        data-time="{{quiz.time}}"
+        data-pass="{{quiz.required_score}}"
         data-toggle="modal" 
-        data-target="#quizeModal">
+        data-target="#quizModal">
 
-        {{quize.name}}
+        {{quiz.name}}
     </button>
     <br>
-    
-    
-    {% endfor %}
+      
+  {% endif %}
+{% endfor %}
   </div>
 
 {%endblock content%}

@@ -5,7 +5,8 @@ from connect.models import User
 QUESTION_TYPE = (
         ('MCQ', 'Multiple Choice'),
         ('TF', 'True or False'),
-        ('FIB', 'Fill in the Blank'),)
+        ('FIB', 'Fill in the Blank'),
+        )
         
 
 class Quiz(models.Model):
@@ -14,7 +15,6 @@ class Quiz(models.Model):
     topic = models.CharField(max_length=200)
     number_of_questions = models.IntegerField(default=0)
     time = models.IntegerField(help_text="Time in minutes", default=0)
-    # difficluty = models.CharField(max_length=10)
     required_score = models.IntegerField(help_text="Score required to pass the quiz")
 
     def __str__(self):
