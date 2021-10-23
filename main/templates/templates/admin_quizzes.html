@@ -19,45 +19,66 @@ Admin
 <hr>
 <div class="row">
 
-{% for quiz in object_list %}
-  {% if request.user == quiz.admin %}
-    <!-- Modal -->
-    <div class="modal fade " id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Start quiz ?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body" id="modal-confirm">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
-              <button type="button" id="update-button" class="btn btn-success">Update</button>
-            </div>
-          </div>
-        </div>
-    </div>
-    
-    <button 
-        class="btn btn-link modal-button btnquiz col-sm"
-        data-pk="{{quiz.pk}}"
-        data-quize="{{quiz.name}}"
-        data-questions="{{quiz.number_of_questions}}"
-        data-time="{{quiz.time}}"
-        data-pass="{{quiz.required_score}}"
-        data-toggle="modal" 
-        data-target="#quizModal">
+  {% if quizzes|length == 0%}
+    <img src="/static/images/empty-quiz.png/" class="rounded mx-auto d-block" style="width: 200px;margin:20px" alt="empty">
+{% endif %}
 
-        {{quiz.name}}
-    </button>
-    <br>
-      
-  {% endif %}
-{% endfor %}
-  </div>
+
+
+  
+
+  {% for quiz in quizzes %}
+  <!-- {% if request.user == quiz.admin %} -->
+          <!-- Modal -->
+          <div class="modal fade " id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Start quiz ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="modal-confirm">
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
+                    <button type="button" id="update-button" class="btn btn-success">Update</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+          <button 
+              class="btn btn-link modal-button btnquiz col-sm"
+              data-pk="{{quiz.pk}}"
+              data-admin = "{{quiz.admin}}"
+              data-quize="{{quiz.name}}"
+              data-questions="{{quiz.number_of_questions}}"
+              data-time="{{quiz.time}}"
+              data-pass="{{quiz.required_score}}"
+              data-object-list = "{{object_list}}"
+              data-toggle="modal" 
+              data-target="#quizModal">
+
+              {{quiz.name}}
+          </button>
+          <br>
+            
+          <!-- {% endif %} -->
+        {% endfor %}
+</div>
 
 {%endblock content%}
+
+<script>
+  var objectList = JSON.parse('{{ object_list }}');
+  window.onload = function () {
+    if(objectList.length == 0){
+      document.getElementById("empty-quiz").innerHTML = "No quizzes created yet";
+    }
+  }  
+</script>
+
+

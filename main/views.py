@@ -28,17 +28,23 @@ def index(request):
 class QuizzesList(ListView):
     model = Quiz
     template_name = 'templates/quizzes.html'
-
 # __________/ for admin \____________
 class QuizzesListAdmin(ListView):
     model = Quiz
-    template_name = 'templates/admin_quizzes.html'    
+    template_name = 'templates/admin_quizzes.html'
+
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super(QuizzesListAdmin, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['quizzes'] = Quiz.objects.filter(admin=self.request.user)
+        return context    
 
 
 # __________/ for quiz details \____________
 def quiz_detail(request, pk):
     questions_length = get_object_or_404(Quiz, pk=pk).get_questions().count()
-    print("questions_length = ",questions_length)
     context = {
         'questions_length' : questions_length,
         'quiz': get_object_or_404(Quiz, pk=pk)
@@ -200,7 +206,6 @@ def quize_delete(request,pk):
 def question_create(request, pk):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
-        print("pk = ",pk)
         form.instance.quiz = get_object_or_404(Quiz, pk=pk)
 
         if form.is_valid():
@@ -214,13 +219,13 @@ def question_create(request, pk):
     if request.method == 'GET':
         form = QuestionForm(request.POST)
         form = QuestionForm()
-        quiz = Quiz.objects.all()
+        quiz = get_object_or_404(Quiz, pk=pk)
+        quizzes = Quiz.objects.all()
         quiz_choice = []
-        for q in quiz:
+        for q in quizzes:
             if q.id == pk:
                 quiz_choice.append(q.id)
                 quiz_choice.append(q.name)
-        print("quiz_choice = ",quiz_choice)
         context = {
             'form': form,
             'quiz': quiz,

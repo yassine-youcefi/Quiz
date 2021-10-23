@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     'widget_tweaks',
+    "django_jinja",
 
 
     'main',
@@ -75,6 +76,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'quiz.urls'
 
 TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {}
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'],
@@ -159,3 +166,6 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'main:index'
+
+MEDIA_ROOT = 'main/static/images/'
+MEDIA_URL = '/images/'
