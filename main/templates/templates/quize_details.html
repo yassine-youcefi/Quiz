@@ -25,7 +25,7 @@
     <div class="col text-right" style="color: cornsilk ;" id="time-div"></div>
 
 </div>
-<a href="{% url 'main:quiz_list' %}" class="link-danger" style="color: crimson ;" > go back</a>
+<a class="btn btn-danger" style="margin: 15px;"  href="{% url 'main:quiz_list' %}">Return</a>
 
 
 
@@ -53,5 +53,8 @@
 {% else%}
 <img src="/static/images/empty.png/" class="rounded mx-auto d-block" style="width: 300px;" alt="empty">
 {% endif %}
+
+
+
 
 {%endblock content%}

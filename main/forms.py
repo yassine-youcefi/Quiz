@@ -22,11 +22,11 @@ class QuestionForm(ModelForm):
         model = Question
         fields = ['question_type', 'text']
 
-# # create form for Answer model (create answer)
-# class AnswerForm(ModelForm):
-#     class Meta:
-#         model = Answer
-#         fields = '__all__'
+# create form for Answer model (create answer)
+class AnswerForm(ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['user', 'question', 'text', 'correct']
 
 # crete form for delete quiz
 

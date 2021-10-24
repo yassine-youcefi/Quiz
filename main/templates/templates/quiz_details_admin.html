@@ -7,6 +7,7 @@
 
 
 {% block content %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -64,8 +65,9 @@
 
 <div class="row ">
     
-    <a class="nav-item nav-link" style="color: green;"  href="/quiz/admin/{{quiz.id}}/update/">Edit Quize</a>
-    <a class="nav-item nav-link" style="color: red;" href="/quiz/admin/{{quiz.id}}/delete/">Delete Quize</a>
+    <a class=" btn btn-success" style="margin: 15px;"   href="/quiz/admin/{{quiz.id}}/update/">Edit Quize</a>
+    <a class="btn btn-danger" style="margin: 15px;"  href="/quiz/admin/{{quiz.id}}/delete/">Delete Quize</a>
+    <a class="btn btn-dark" style="margin: 15px;" href="/quiz/admin/{{quiz.id}}/details/questions/">View questions</a>
 
 </div>
 

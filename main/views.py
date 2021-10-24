@@ -3,11 +3,13 @@ from django.http import HttpResponse
 from .models import User, Quiz, Question, Answer, Result
 from django.views.generic import ListView
 from django.http import JsonResponse, HttpResponseRedirect
-from .forms import QuizForm, QuizEditForm,QuestionForm
+from .forms import QuizForm, QuizEditForm,QuestionForm, AnswerForm
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, get_list_or_404
 from .decorators import allowed_users
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt,csrf_protect #Add this
+
 
 
 
@@ -176,8 +178,10 @@ def quiz_update(request, pk):
 
             return redirect('main:quiz_list_admin')
         else:
-            print("form not valid")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            print("form not valid" ,form.errors)
+            messages.error(
+            request, f'Failed to update {quiz.name}')
+            return redirect('main:quiz_detail_admin')
 
     else:
         quiz = Quiz.objects.get(pk=pk)
@@ -201,6 +205,18 @@ def quize_delete(request,pk):
         context = {'quiz' : quiz}
         return render(request, 'templates/quiz_delete.html', context)
 
+def quiz_questions(request, pk):
+    
+    quiz = get_object_or_404(Quiz, pk=pk)
+    questions = quiz.get_questions()
+    print('hhh ',questions)
+    context = {
+        'quiz': quiz,
+        'questions': questions,
+        
+    }
+    return render(request, 'templates/quiz_questions.html', context)
+
 
 # __________/ for question options \____________
 def question_create(request, pk):
@@ -212,7 +228,7 @@ def question_create(request, pk):
             form.save()
             messages.success(
                 request, f'Question is create successfuly for ')
-            return redirect('main:quiz_detail_admin', pk=pk)
+            return redirect('main:quiz_questions', pk=pk)
         else:
             print("form not valid")
             return redirect('main:quiz_detail_admin', pk=pk)    
@@ -233,3 +249,43 @@ def question_create(request, pk):
             }
     return render(request, 'templates/question_create.html',context=context )
 
+def question_ansewrs(request, pk, pk_question):
+    
+    quiz = Quiz.objects.get(pk=pk)
+    question = get_object_or_404(Question, pk=pk_question)
+    print('*****  ',question)
+
+
+    context = {
+        'question': question,
+        'quiz_pk' : pk,
+        'pk_question':pk_question
+    }
+    return render(request, 'templates/question_answers.html', context)        
+
+@csrf_exempt
+def answer_create(request, pk, pk_question):
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        form.instance.user = request.user
+        
+       
+
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, f'Answer is create successfuly  ')
+            return redirect(f'/quiz/admin/{pk}/details/questions/{pk_question}/answers/')
+        else:
+            print("form not valid")
+            return redirect('main:quiz_detail_admin', pk=pk)
+
+    else:
+        form = AnswerForm()
+        questions = Question.objects.filter(quiz=pk)
+        context = {
+            'pk_question':pk_question,
+            'form': form,
+            'questions': questions,
+        }
+        return render(request, 'templates/create_answer.html', context)        

@@ -12,7 +12,7 @@ Admin
 {% block content%}
 <div class="row ">
   <h1 class="col-sm" >Quizzes : </h1>
-  <a class="nav-item nav-link" id="create_quiz" href="{% url 'main:quiz_create' %}">Create quiz</a>
+  <!-- <a class="nav-item nav-link" id="create_quiz" href="{% url 'main:quiz_create' %}">Create quiz</a> -->
 </div>
 
 <hr>
@@ -42,6 +42,8 @@ Admin
                   <div class="modal-footer">
                     <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
                     <button type="button" id="update-button" class="btn btn-success">Update</button>
+                    <button type="button" id="details-button" class="btn btn-dark">Details</button>
+
                   </div>
                 </div>
               </div>
@@ -64,6 +66,12 @@ Admin
           <br>
             
         {% endfor %}
+</div>
+
+<div class="row ">
+    
+  <a class=" btn btn-success" style="margin: 15px;"   href="{% url 'main:quiz_create' %}">Create quiz</a>
+
 </div>
 
 {%endblock content%}

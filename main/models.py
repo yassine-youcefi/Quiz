@@ -37,7 +37,7 @@ class Question(models.Model):
         return self.answer.all()
 
 class Answer(models.Model):
-    User = models.ForeignKey(User, on_delete=models.CASCADE, related_name="usrt_answer")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="usrt_answer")
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
     text = models.CharField(max_length=200)
     correct = models.BooleanField(default=False)
