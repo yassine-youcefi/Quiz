@@ -39,9 +39,11 @@
     <div id="quiz-div"></div>
     <button id="quize-submit-button" 
             type="submit" 
-            class="btn btn-primary mt-3">
+            class="btn btn-success" style="margin: 30px;">
         Save
     </button>
+    <a class="btn btn-primary" id="quit_question" href="{% url 'main:quiz_list' %}">Cancel</a>
+
 </form>
 </div>
 <div id="score-div"></div>

@@ -2,8 +2,7 @@
 
 {%load static%}
 {%block script%} 
-<!-- Optional JavaScript -->
-<script src="{% static 'admin.js' %}" defer></script> -->
+<script src="{% static 'admin.js' %}" defer></script>
  {%endblock script%}
 
 {% block title %}
@@ -28,8 +27,6 @@ Admin
   
 
   {% for quiz in quizzes %}
-  <!-- {% if request.user == quiz.admin %} -->
-          <!-- Modal -->
           <div class="modal fade " id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -66,7 +63,6 @@ Admin
           </button>
           <br>
             
-          <!-- {% endif %} -->
         {% endfor %}
 </div>
 
