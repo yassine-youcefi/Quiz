@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{%load static%}
+<!-- {%block script%} 
+<script src="{% static 'admin.js' %}" defer></script>
+ {%endblock script%} -->
+
+{% block title %}
+
+{% endblock title %}
+{{question.text}} 
+{% block content%}
+    <div class="row ">
+            <h1 class="col-sm" >{{question.text}} </h1>
+            <!-- <a class="nav-item nav-link" id="create_quiz" href="/quiz/admin/{{quiz.id}}/update/question/create/">Create New answer</a> -->
+    </div>
+
+    <hr>
+      
+
+    <div style="margin: 15px;">
+        {% if question.get_answers|length > 0%}
+            {% for answer in question.get_answers %}
+                <ul class="list-group list-group-flush">
+                    {% if answer.correct %}
+                    <li class="list-group-item list-group-item-success">{{answer.text}}</li>
+                    {% else %}
+                    <li class="list-group-item list-group-item-danger">{{answer.text}}</li>
+                    {% endif %}
+                </ul>
+
+                <br>
+            {% endfor %}
+        {% else %}
+            <img src="/static/images/empty.png/" class="rounded mx-auto d-block" style="width: 300px;" alt="empty">
+        {% endif %}
+    </div>
+    <div class="row ">
+    
+        <a class=" btn btn-success" style="margin: 15px;"   href="/quiz/admin/{{quiz_pk}}/details/questions/{{pk_question}}/answers/create/">Create answer</a>
+        <a class="btn btn-danger" style="margin: 15px;"  href="/quiz/admin/{{quiz_pk}}/details/questions/">Return</a>
+    
+    </div>
+</div>
+
+{%endblock content%}
+
+
+
+

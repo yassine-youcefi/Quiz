@@ -1,0 +1,65 @@
+{% extends "layout/base.html" %}
+
+{%load static%}
+<!-- {%block script%} 
+<script src="{% static 'admin.js' %}" defer></script>
+ {%endblock script%} -->
+
+{% block title %}
+
+{% endblock title %}
+{{question.text}} 
+{% block content%}
+    <div class="row ">
+            <h1 class="col-sm" > create new answer : </h1>
+            <!-- <a class="nav-item nav-link" id="create_quiz" href="/quiz/admin/{{quiz.id}}/update/question/create/">Create New answer</a> -->
+    </div>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}    
+        <fieldset class="form-group">
+            
+            <div class="form-group">
+                <label for="username">User :</label>
+                <select class="form-control" name="user" id="user">                    
+                    <option value="{{request.user.id}}">{{request.user.username}}</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="username">Question :</label>
+                <select class="form-control" name="question" id="question"> 
+                    {% for q in questions %} 
+                        {%if q.id == pk_question%}                  
+                            <option value="{{q.id}}">{{q.text}}</option>
+                        {%endif%}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="username">Text :</label>
+                <input type="text" class="form-control" id="text" name="text" placeholder="text">
+            </div>
+            <div class="form-group">
+                <label for="username">{{form.correct.label}} :</label>
+                {{form.correct}}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit" >
+                Create
+            </button>
+        </div>
+    </form>
+      
+    <!-- {{form.as_p}} -->
+    
+</div>
+
+{%endblock content%}
+
+
+
+

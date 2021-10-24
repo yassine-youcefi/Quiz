@@ -12,10 +12,7 @@ body {
     color: #fff;
 }  
 
-#quize-submit-button {
-    background-color: #010409;
-    border-color: #fff;
-}
+
 
 hr {
     border-color: #fff;
@@ -80,3 +77,31 @@ hr {
     justify-content: center;
     align-items: center;
 }
+
+#h1-delete {
+    margin: 20px;
+}
+
+#h5-delete {
+    margin: 20px;
+}
+
+#create_quiz {
+    
+    background-color: #003140;
+    color: #fff;
+    border-color: #fff;
+    min-width: 100px ;
+    margin : 5px 10px ;
+    
+}
+
+#quit_question{
+    background-color: red;
+    min-width: 100px ;
+    margin : 5px 10px ;
+    
+} 
+
+#username_header {
+    -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}

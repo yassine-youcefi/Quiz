@@ -1,0 +1,74 @@
+{% extends "layout/base.html" %}
+
+
+{% block title %}
+ {{quiz.name}}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="col-sm">
+            Quiz : <b>{{quiz.name}}</b> </h1>
+            
+        </div>
+
+    </div>
+    <hr>
+
+
+    <div class="row">
+        <label for="username"><h2>Topic :</h2></label>
+        <div class="col">
+            <h4 class="col-sm" >
+                {{quiz.topic}}
+            </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="username"><h2>number of questions :</h2></label>
+        <div class="col">
+            <h4 class="col-sm">
+                {{quiz.number_of_questions}}
+            </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="username"><h2>time :</h2></label>
+        <div class="col">
+            <h4 class="col-sm">
+                {{quiz.time}} min
+            </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="username"><h2>Score :</h2></label>
+        <div class="col">
+            <h4 class="col-sm">
+                {{quiz.required_score}}
+            </h4>
+        </div>
+    </div>    
+</div>
+
+
+
+
+<hr>
+
+
+<div class="row ">
+    
+    <a class=" btn btn-success" style="margin: 15px;"   href="/quiz/admin/{{quiz.id}}/update/">Edit Quize</a>
+    <a class="btn btn-danger" style="margin: 15px;"  href="/quiz/admin/{{quiz.id}}/delete/">Delete Quize</a>
+    <a class="btn btn-dark" style="margin: 15px;" href="/quiz/admin/{{quiz.id}}/details/questions/">View questions</a>
+
+</div>
+
+{% endblock %}

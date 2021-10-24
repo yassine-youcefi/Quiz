@@ -1,0 +1,88 @@
+{% extends "layout/base.html" %}
+
+{%load static%}
+{%block script%} 
+<script src="{% static 'admin.js' %}" defer></script>
+ {%endblock script%}
+
+{% block title %}
+Admin
+{% endblock title %}
+
+{% block content%}
+<div class="row ">
+  <h1 class="col-sm" >Quizzes : </h1>
+  <!-- <a class="nav-item nav-link" id="create_quiz" href="{% url 'main:quiz_create' %}">Create quiz</a> -->
+</div>
+
+<hr>
+<div class="row">
+
+  {% if quizzes|length == 0%}
+    <img src="/static/images/empty-quiz.png/" class="rounded mx-auto d-block" style="width: 200px;margin:20px" alt="empty">
+{% endif %}
+
+
+
+  
+
+  {% for quiz in quizzes %}
+          <div class="modal fade " id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Start quiz ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="modal-confirm">
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="delete-button"  class="btn btn-danger" data-dismiss="modal">Delete</button>
+                    <button type="button" id="update-button" class="btn btn-success">Update</button>
+                    <button type="button" id="details-button" class="btn btn-dark">Details</button>
+
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+          <button 
+              class="btn btn-link modal-button btnquiz col-sm"
+              data-pk="{{quiz.pk}}"
+              data-admin = "{{quiz.admin}}"
+              data-quize="{{quiz.name}}"
+              data-questions="{{quiz.number_of_questions}}"
+              data-time="{{quiz.time}}"
+              data-pass="{{quiz.required_score}}"
+              data-object-list = "{{object_list}}"
+              data-toggle="modal" 
+              data-target="#quizModal">
+
+              {{quiz.name}}
+          </button>
+          <br>
+            
+        {% endfor %}
+</div>
+
+<div class="row ">
+    
+  <a class=" btn btn-success" style="margin: 15px;"   href="{% url 'main:quiz_create' %}">Create quiz</a>
+
+</div>
+
+{%endblock content%}
+
+<script>
+  var objectList = JSON.parse('{{ object_list }}');
+  window.onload = function () {
+    if(objectList.length == 0){
+      document.getElementById("empty-quiz").innerHTML = "No quizzes created yet";
+    }
+  }  
+</script>
+
+

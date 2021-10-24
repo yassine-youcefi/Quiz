@@ -12,8 +12,9 @@ helloworld
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Create a new quiz</h1>
+            <h1 class="col-sm">Create a new quiz</h1>
         </div>
+        <hr>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -22,7 +23,9 @@ helloworld
                 <div class="content" id="create-quize">
                     {% crispy form %}
 
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-success">Create</button>
+                <a class="btn btn-danger" style="margin: 15px;"  href="{% url 'main:quiz_list_admin' %}">Return</a>
+
                 </div>    
             </form>
         </div>

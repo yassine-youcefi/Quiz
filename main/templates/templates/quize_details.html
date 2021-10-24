@@ -15,18 +15,23 @@
 
 <div class="row">
     <div class="col">
-        <h1>{{quiz.name.upper}} </h1>
-        <b style="color: cornsilk ;"> score to pass: {{quiz.required_score}}%</b>
+        <h1 class="col-sm" >{{quiz.name.upper}} </h1>
     </div>
+    <div class="col">
+
+    <b style="color: cornsilk ;"> score to pass: {{quiz.required_score}}%</b>
+    </div>
+    <hr>
     <div class="col text-right" style="color: cornsilk ;" id="time-div"></div>
 
 </div>
-<a href="{% url 'main:quiz_list' %}" class="link-danger" style="color: crimson ;" > go back</a>
+<a class="btn btn-danger" style="margin: 15px;"  href="{% url 'main:quiz_list' %}">Return</a>
 
 
 
 
 <hr>
+{% if questions_length > 0  %}
 <h2 >Questions :</h2>
 <div id="form-div">
 <form id="quiz-details-form" class="mt-3 mb-3">
@@ -34,13 +39,22 @@
     <div id="quiz-div"></div>
     <button id="quize-submit-button" 
             type="submit" 
-            class="btn btn-primary mt-3">
+            class="btn btn-success" style="margin: 30px;">
         Save
     </button>
+    <a class="btn btn-primary" id="quit_question" href="{% url 'main:quiz_list' %}">Cancel</a>
+
 </form>
 </div>
 <div id="score-div"></div>
 <div id="results-div"></div>
 
 </div>
+{% else%}
+<img src="/static/images/empty.png/" class="rounded mx-auto d-block" style="width: 300px;" alt="empty">
+{% endif %}
+
+
+
+
 {%endblock content%}

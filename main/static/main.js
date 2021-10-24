@@ -1,3 +1,4 @@
+// fror admin_quizzeshtml
 const modal = [...document.getElementsByClassName('modal-button')];
 const modalBody = document.getElementsByClassName('modal-body')[0];
 const start = document.getElementById('start-button');
@@ -9,7 +10,8 @@ modal.forEach(modal => modal.addEventListener('click', () => {
     const name = modal.getAttribute('data-quize');
     const numberQuestions = modal.getAttribute('data-questions')   
     const time = modal.getAttribute('data-time')   
-    const pass = modal.getAttribute('data-pass')   
+    const pass = modal.getAttribute('data-pass') 
+    const questionsLength = modal.getAttribute('questions-length')  
 
     modalBody.innerHTML = `
 
@@ -29,8 +31,6 @@ modal.forEach(modal => modal.addEventListener('click', () => {
     
     })
 }))
-
-
 
 
 

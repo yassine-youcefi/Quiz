@@ -10,14 +10,23 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4"> Login </legend>
-            </br>
+            
             <!-- {% crispy form %} -->
-            {% for field in form %}
+            <!-- {% for field in form %}
                 <div class="fieldWrapper">
                     {{ field.errors }}
                     {{ field.label_tag }} {{ field }}
                 </div>
-            {% endfor %}
+            {% endfor %} -->
+
+            <div>
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+            </div>
         </fieldset>
         <div class="form-group">
             <button class="btn btn-onlige-info"  type="submit" style="background-color:#010409; color:#fff">

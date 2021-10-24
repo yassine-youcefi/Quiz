@@ -9,17 +9,63 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1>Update {{quiz.name}} Quiz</h1>
-            </div>
+            <h1 class="col-sm" >Update {{quiz.name}} Quiz</h1>
+            <a class="nav-item nav-link" id="create_quiz" href="{{request.url}} question/create/">Create Questions</a>
         </div>
-        <form action="{% url 'main:quiz_create' %}" method="post">
+        
+        <hr>
+        <div class="row"></div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter quiz name">
+                </div>
+
+                <div>
+                    <label for="topic">Topic</label>
+                    <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter quiz topic">
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <label for="number_of_questions" >Number of questions</label>
+                    <!-- <input type="number" class="form-control" id="number-of-questions" name="id_number_of_questions" placeholder="Enter quiz number of questions"> -->
+                    {{ form.number_of_questions }}
+                </div>
+
+                <div>
+                    <label for="time">Time </label>
+                    <input type="number" class="form-control" id="time" name="time" placeholder="Enter quiz time">
+                </div>
+
+                <div style="margin: 20px;">
+                    <label for="score">Score </label>
+                    <!-- <input type="number" class="form-control" id="score" name="score" placeholder="Enter quiz store"> -->
+                    {{ form.required_score }}
+                </div>        
+
+
+
+
+
+
+
+                <button class="btn btn-success" type="submit" >
+                    Update
+                </button> 
+                <a class="btn btn-danger" style="margin: 15px;"  href="/quiz/admin/{{quiz.id}}/details/">Return</a>
+           
+            </form>
+         </div>
+        <br/><br/>
+
+        <!-- <form action="{% url 'main:quiz_create' %}" method="post">
             {% csrf_token %}
             <div class="content" id="create-quize">
                 {% crispy form %}
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit"  value="Edit Post" class="btn btn-primary">Update</button>
             </div>    
-        </form>
+        </form> -->
     </div>
 {% endblock %}

@@ -193,7 +193,6 @@ const resulsDiv = document.getElementById('results-div');
         }
       }
       const body = document.getElementById('form-div');
-      // console.log('body = ',body)
       resulsDiv.append(responseDiv);
 
 

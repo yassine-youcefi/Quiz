@@ -1,28 +1,53 @@
 {% extends "layout/base.html" %} {% block content%}
 {% load crispy_forms_tags %}
 <div class="content-section">
-    <form action="" method="POST">
-        {% csrf_token %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}    
         <fieldset class="form-group">
             <legend class="border-bottom mb-4"> Sign up Todey</legend>
-            <!-- {% crispy form %} -->
-            {% for field in form %}
-                <div class="fieldWrapper">
-                    {{ field.errors }}
-                    {{ field.label_tag }} {{ field }}
+            
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="email" >
+            </div> 
+            <div>
+                <label for="groups">{{form.groups.label}}</label>
+                <select id='select-groups' class="browser-default custom-select" name="groups">
+                    {% for group in groups  %}    
+
+                    <option value="{{group.index}}">{{group.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>  
+
+            <div>
+                <label for="password">{{form.password1.label}}</label>
+                <div class="form">
+                    {{form.password1}}
                 </div>
-            {% endfor %}
+            </div>
+            <div>
+                <label for="password">{{form.password2.label}}</label>
+                <div class="form">
+                    {{form.password2}}
+                </div>
+            </div>
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-onlige-info" type="submit" style="background-color:#0c4b33; color:#fff">
+            <button class="btn btn-success" type="submit" >
                 Sign up
             </button>
         </div>
     </form>
-    <div class="border-top py-3">
-        <small class="text-muted">
-            I have An Account !<a href="{% url 'login'%}" class="ml-2">Login</a>
-        </small>
-    </div>
+            <div class="border-top py-3">
+                <small class="text-muted">
+                    I have An Account !<a href="{% url 'login'%}" class="ml-2" >Login</a>
+                </small>
+            </div>
 </div>
 {%endblock content%}

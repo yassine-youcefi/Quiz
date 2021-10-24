@@ -11,12 +11,13 @@ Quizzes list
 {% endblock title %}
 
 {% block content%}
-<div class="row ">
+<div class="row "> 
   <h1 class="col-sm" >Quizzes : </h1>
 </div>
 
 <hr>
 <div class="row">
+
 {% for quize in object_list %}
 <!-- Modal -->
 <div class="modal fade " id="quizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,7 +40,6 @@ Quizzes list
     </div>
   </div>
 
-  
     <button 
         class="btn btn-link modal-button btnquiz col-sm"
         data-pk="{{quize.pk}}"
