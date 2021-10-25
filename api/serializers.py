@@ -48,35 +48,35 @@ class GetQuizSerializer(serializers.ModelSerializer):
         model = Quiz
         fields = ('id','admin', 'name', 'topic', 'number_of_questions', 'time', 'required_score')
 
-class PostQuizSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Quiz
-        fields = ('name', 'topic', 'number_of_questions', 'time', 'required_score')
-
-class PutQuizSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Quiz
-        fields = ('name', 'topic', 'number_of_questions', 'time', 'required_score')        
 
 
 # _______________ / Questions serializers \_______________
-class GetQuestionListSerializer(serializers.ModelSerializer):
-    class Meta:
 
+class GetAnswersSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ('user', "question", "text")
+
+class GetQuestionListSerializer(serializers.ModelSerializer):
+    answer = GetAnswersSerializers(many=True)
+    class Meta:
         model = Question
-        fields = ('id', 'question_type', 'quiz', 'text', 'cereated_at','answers')
+        fields = ('id', 'question_type', 'quiz', 'text', "answer")
 
 class GetQuestionSerializer(serializers.ModelSerializer):
+    answer = GetAnswersSerializers(many=True)
     class Meta:
         model = Question
-        fields = ('id', 'question_type', 'quiz', 'text', 'cereated_at','answers')
+        fields = ('id', 'question_type', 'quiz', 'text','answer')
 
 class PostQuestionSerializer(serializers.ModelSerializer):
+    answer = GetAnswersSerializers(many=True,read_only=True)
+
     class Meta:
         model = Question
-        fields = ('question_type', 'quiz', 'text', 'answers')
+        fields = ('question_type', 'quiz', 'text', 'answer')
 
 class PutQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('question_type', 'quiz', 'text', 'answers')
+        fields = ('question_type', 'quiz', 'text', 'answer')

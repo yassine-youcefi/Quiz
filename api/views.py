@@ -37,11 +37,47 @@ class QuizListView(APIView):
         serializer = GetQuizListSerializer(quizzes, many=True)
         return Response(serializer.data)
 
+class QuizView(APIView):
+    def get(self, request, pk, format=None):
+        quiz = Quiz.objects.get(pk=pk)
+        serializer = GetQuizSerializer(quiz)
+        return Response(serializer.data)
+
+
 
 
 # _______________ / Questions views \_______________
 class QuestionsListView(APIView):
     def get(self, request):
         questions = Question.objects.all()
-        serializer = GetQuestionListSerializer(questions)
+        serializer = GetQuestionListSerializer(questions, many=True)
         return Response(serializer.data)
+
+class QuestionsListQuizView(APIView):
+    def get(self, request, pk, format=None):
+        quiz = Quiz.objects.get(pk=pk, admin=request.user.id)
+        questions = Question.objects.filter(quiz=quiz.id)
+        serializer = GetQuestionListSerializer(questions, many=True)
+        return Response(serializer.data)    
+
+   
+class QuestionView(APIView):
+    def get(self, request, pk, format=None):
+        question = Question.objects.get(pk=pk)
+        serializer = GetQuestionSerializer(question)
+        return Response(serializer.data)
+    def put(self, request, pk, format=None):
+        question = Question.objects.get(pk=pk)
+        serializer = PutQuestionSerializer(question, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)    
+
+class QuestionCreateView(APIView):
+    def post(self, request, format=None):
+        serializer = PostQuestionSerializer(data=request.data)
+        if serializer.is_valid():
+            # serializer.validated_data['admin'] = request.user.id
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
