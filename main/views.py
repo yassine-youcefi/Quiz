@@ -93,7 +93,7 @@ def quiz_result(request, pk):
         
         # append all post data questions to the questions list
         for key in data.keys():
-            get_object_or_404(Quiz, pk=pk)
+            quiz =get_object_or_404(Quiz, pk=pk)
             question = get_object_or_404(Question, text=key)
             questions.append(question)
 
