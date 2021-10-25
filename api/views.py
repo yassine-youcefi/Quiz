@@ -28,8 +28,6 @@ class UserView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
 # _______________ / Quiz views \_______________
 class QuizListView(APIView):
     def get(self, request):
@@ -42,9 +40,6 @@ class QuizView(APIView):
         quiz = Quiz.objects.get(pk=pk)
         serializer = GetQuizSerializer(quiz)
         return Response(serializer.data)
-
-
-
 
 # _______________ / Questions views \_______________
 class QuestionsListView(APIView):
@@ -74,6 +69,7 @@ class QuestionView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)    
 
 class QuestionCreateView(APIView):
+
     def post(self, request, format=None):
         serializer = PostQuestionSerializer(data=request.data)
         if serializer.is_valid():
@@ -81,3 +77,26 @@ class QuestionCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# _______________ / Answers views \_______________
+class AnswersListView(APIView):
+    def get(self, request, pk, format=None):
+        question = Question.objects.get(pk=pk)
+        answers = Answer.objects.filter(question=question.id)
+        serializer = AnswerListSerializer(answers, many=True)
+        return Response(serializer.data)
+    def post(self, request, pk, format=None):
+        question = Question.objects.get(pk=pk)
+        print(question)
+        request.data['user'] = request.user.id
+        request.data['question'] = question.id
+        serializer = PostAnswerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)    
+        
+    def delete(self, request, pk, format=None):
+        answer = Answer.objects.get(pk=pk)
+        answer.delete()
+        return Response(status=status.HTTP_201_CREATED)    

@@ -5,6 +5,8 @@ from .views import (UserView,
                     QuizListView,QuizView,
                     QuestionsListQuizView,
                     QuestionCreateView, 
+                    AnswersListView,
+                    
                     QuestionView)
 
 urlpatterns = [
@@ -12,6 +14,8 @@ urlpatterns = [
     path('user/', UserView.as_view(), name='user'),
     path('questions/', QuestionsListView.as_view(), name='questions'),
     path('question/<int:pk>/', QuestionView.as_view(), name='question'),
+    path('answers/<int:pk>/', AnswersListView.as_view(), name='answers-delete'),
+    path('question/<int:pk>/answers/', AnswersListView.as_view(), name='answers'),
     path('question/', QuestionCreateView.as_view(), name='question-create'),
 
 
