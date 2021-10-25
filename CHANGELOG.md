@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - documentation
 - Docker configuration
 
-### Changed
 
-### Removed
+## [1.0.1] - 2021-10-25
+
+### Changed
+- quiz_result view duplicate question for results
+
+ 
