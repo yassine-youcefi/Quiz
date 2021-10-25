@@ -18,4 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - quiz_result view duplicate question for results
 
+ ## [1.0.2] - 2021-10-25
+ ### Added
+ - Procfile deployment on [quizyani](https://quizyani.herokuapp.com/)
+ 
+### Changed
+- database configuration to postgres (only on deployment)
+
  
