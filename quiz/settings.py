@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'livesync',
+    'oauth2_provider',
     'rest_framework',
     'crispy_forms',
     'widget_tweaks',
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "oauth2_provider.middleware.OAuth2TokenMiddleware",
 ]
 
 # MIDDLEWARE_CLASSES = (
@@ -74,6 +76,7 @@ MIDDLEWARE = [
 # }
 
 ROOT_URLCONF = 'quiz.urls'
+
 
 TEMPLATES = [
     {
@@ -128,6 +131,25 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+# REST_FRAMEWORK ...
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer", 'rest_framework.renderers.BrowsableAPIRenderer',),
+}
+
+# OAUTH2 CONF ...
+OAUTH2_PROVIDER = {
+    "OAUTH2_BACKEND_CLASS": "oauth2_provider.oauth2_backends.JSONOAuthLibCore",
+    "ACCESS_TOKEN_EXPIRE_SECONDS": 36000,  # 10 Hours
+}
+
 
 
 # Internationalization

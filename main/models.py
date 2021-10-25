@@ -35,6 +35,8 @@ class Question(models.Model):
 
     def get_answers(self):
         return self.answer.all()
+    
+
 
 class Answer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="usrt_answer")
