@@ -82,7 +82,10 @@ class QuestionCreateView(APIView):
 # _______________ / Answers views \_______________
 class AnswersListView(APIView):
     def get(self, request, pk, format=None):
-        question = Question.objects.get(pk=pk)
+        try:
+            question = Question.objects.get(pk=pk)
+        except Question.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)    
         answers = Answer.objects.filter(question=question.id)
         serializer = AnswerListSerializer(answers, many=True)
         return Response(serializer.data)
