@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-yo*ttxok@%je5!85eqx$kdw4imk=at80v1g8zl^(wp0r_gi&qk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 
 # Application definition
@@ -165,7 +165,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-        BASE_DIR / 'static',
+        BASE_DIR / 'main' / 'static',
         BASE_DIR / 'main' / 'static'
 ]
 
@@ -184,3 +184,10 @@ LOGIN_REDIRECT_URL = 'main:index'
 
 MEDIA_ROOT = 'main/static/images/'
 MEDIA_URL = '/images/'
+
+
+
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())

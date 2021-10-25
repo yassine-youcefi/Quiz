@@ -1,0 +1,107 @@
+#content {
+    min-height: 60vh;
+}
+
+b {
+    font-weight: bold;
+    color: firebrick;
+  }
+
+body {
+    background-color: #003140;
+    color: #fff;
+}  
+
+
+
+hr {
+    border-color: #fff;
+}
+
+/* #quiz-div {
+    background-color: #fff;
+    color: #003140;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+} */
+.footer{
+    background-color:#010409 !important; 
+    margin-top: 30px;
+    margin-top: 15px;
+}
+
+.failed {
+    margin: 20px;
+    color: red;
+
+}
+
+.result {
+    color: antiquewhite;
+    margin: 20px;
+
+}
+
+.sucess {
+    color : green;
+    margin: 20px;
+}
+
+.not-visible {
+    display: none;
+}
+
+.btnquiz {
+    background-color: #fff;
+    color: #003140;
+    border-color: #003140;
+    min-width: 200px ;
+    
+    margin : 5px 10px 
+}
+
+/* .modal {
+    background-color: #003140;
+} */
+
+.bg-success {
+    background-color: #010409;
+}
+
+/* #quiz-details-form {
+
+} */
+
+.create-quize {
+    justify-content: center;
+    align-items: center;
+}
+
+#h1-delete {
+    margin: 20px;
+}
+
+#h5-delete {
+    margin: 20px;
+}
+
+#create_quiz {
+    
+    background-color: #003140;
+    color: #fff;
+    border-color: #fff;
+    min-width: 100px ;
+    margin : 5px 10px ;
+    
+}
+
+#quit_question{
+    background-color: red;
+    min-width: 100px ;
+    margin : 5px 10px ;
+    
+} 
+
+#username_header {
+    -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
