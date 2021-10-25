@@ -80,3 +80,15 @@ class PutQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ('question_type', 'quiz', 'text', 'answer')
+
+
+# _______________ / Answer serializers \_______________
+class AnswerListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ('id', 'question', 'text')
+
+class PostAnswerSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Answer
+        fields = ('question', 'text','user')        
