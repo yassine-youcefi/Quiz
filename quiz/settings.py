@@ -95,12 +95,15 @@ WSGI_APPLICATION = 'quiz.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "d6utlv3944bfmh",
+        "USER": "alunimveeqcvkz",
+        "PASSWORD":"3312bd7e53b6632f1f7260bc697746137055f3c7a495edee37ec47eaa737e1be",
+        "HOST": "ec2-54-74-95-84.eu-west-1.compute.amazonaws.com",
+        "PORT":5432,
+    },
 }
-
 
 
 
