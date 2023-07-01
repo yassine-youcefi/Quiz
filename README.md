@@ -1,5 +1,5 @@
 # Quiz
-Quiz management application for  BRENCO code challenge
+Quiz management application 
 
 [application link](https://quizyani.herokuapp.com/)
 
