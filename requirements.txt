@@ -22,7 +22,7 @@ gunicorn==22.0.0
 idna==3.7
 Jinja2==3.0.2
 jmespath==0.10.0
-jwcrypto==1.4
+jwcrypto==1.5.6
 Markdown==3.3.4
 MarkupSafe==2.0.1
 oauthlib==3.2.2
