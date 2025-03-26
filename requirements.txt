@@ -20,7 +20,7 @@ django3-livesync==1
 djangorestframework==3.15.2
 gunicorn==23.0.0
 idna==3.7
-Jinja2==3.0.2
+Jinja2==3.1.6
 jmespath==0.10.0
 jwcrypto==1.5.6
 Markdown==3.3.4
